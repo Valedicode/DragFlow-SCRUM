@@ -18,7 +18,7 @@ This project implements the frontend/Graphical User Interface of a Scrum-based s
 
 Developed with Next.js (React)
 
-The user can manage roles (like Scrum Master, Product Owner, etc.) by creating instances, which are listed in the "Current Roles" section. These roles can then be dragged to an operation zone, where the user can organize and define their desired conversation flow.
+The user can manage roles (like Scrum Master, Product Owner, etc.) by creating instances, which are listed in the "Current Roles" section. These roles can then be dragged to an operation zone, where the user can organize and define their desired conversation flow. Also, the user can act as the project leader to decide whether to talk to the frontend developer or backend developer by using the chatbox functionality.
 
 **Technologies and Libraries Used:**
 - **Next.js**: Framework for React to build the frontend.
