@@ -74,7 +74,6 @@ uvicorn main:app --reload
 ### Docker Mode
 Specify the environment variables for the PostgreSQL container in **docker-compose.yml**
 ```bash
-
 POSTGRES_DB: # Set the database name here
 POSTGRES_USER: # Set the database user here
 POSTGRES_PASSWORD: # Set the database password here

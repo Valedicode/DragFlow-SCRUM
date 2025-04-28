@@ -9,8 +9,7 @@ COPY package.json package-lock.json ./
 
 # install dependencies
 RUN npm cache clean --force && \
-    npm install && \
-    npm install lightningcss-linux-x64-gnu
+    npm install 
 
 # copy the rest of the frontend code
 COPY . .
