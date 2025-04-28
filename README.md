@@ -3,11 +3,10 @@
 - [Introduction](#introduction)
   - [Frontend](#frontend)
   - [Backend](#backend)
-  - [Architecture](#architecture)
 - [How to Run Locally](#how-to-run-locally)
   - [Bash Mode](#frontend-1)
   - [Docker](#backend-1)
-- [Execution in Docker Mode](#execution-in-docker-mode)
+
 
 # DragFlow
 
