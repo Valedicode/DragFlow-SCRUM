@@ -12,7 +12,7 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-function FlowComponent({ nodes, setNodes, edges, setEdges }) {
+function FlowComponent({ nodes, setNodes, edges, setEdges, draggedRoles, setDraggedRoles }) {
   // converts screen coordinates to canvas coordinates
   const { screenToFlowPosition } = useReactFlow();
 
@@ -36,7 +36,11 @@ function FlowComponent({ nodes, setNodes, edges, setEdges }) {
   const onDrop = useCallback((event) => {
     event.preventDefault();
     const role = JSON.parse(event.dataTransfer.getData('application/role'));
-    console.log('Dropped Role:', role);
+    // check if role has already been dragged
+    if (draggedRoles.includes(role.id)) {
+      return;
+    }
+
     const bounds = event.target.getBoundingClientRect();
     
     const position = screenToFlowPosition({
@@ -58,7 +62,8 @@ function FlowComponent({ nodes, setNodes, edges, setEdges }) {
         className: '',
       }
     ]);
-  }, [screenToFlowPosition, setNodes]);
+      setDraggedRoles((prevRoles) => [...prevRoles, role.id]);
+  }, [screenToFlowPosition, setNodes, draggedRoles, setDraggedRoles]);
 
   return (
     <div className="h-full border-dashed border-2 border-gray-400 rounded-lg"
@@ -89,6 +94,7 @@ export default function OperationZone({ nodes, setNodes, edges, setEdges }) {
     "Frontend Developer": [],
     "Backend Developer": [],
   });
+  const [draggedRoles, setDraggedRoles] = useState([])
 
   
   const handleMessage = () => {
@@ -113,11 +119,6 @@ export default function OperationZone({ nodes, setNodes, edges, setEdges }) {
     }
   };
   
-
-  const handleChat = () => {
-    setShowChat(!showChat)
-  }
-
   return (
     <div className="relative h-full">
       <ReactFlowProvider>
@@ -126,6 +127,8 @@ export default function OperationZone({ nodes, setNodes, edges, setEdges }) {
           setNodes={setNodes}
           edges={edges}
           setEdges={setEdges}
+          draggedRoles={draggedRoles}
+          setDraggedRoles={setDraggedRoles}
         />
       </ReactFlowProvider>
       {/* Chatbox implmentation*/}

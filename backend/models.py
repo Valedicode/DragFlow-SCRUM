@@ -27,3 +27,14 @@ class Role(BaseModel):
 
     class Config:
         orm_mode = True
+
+'''
+Use this code instead of the code above if no database is set up
+
+class Role(BaseModel):
+    # restrcit the choice of roles to the set of the predefined roles of SCRUM
+    predefined_role: Literal["Scrum Master", "Product Owner", "Developer", "Tester"]
+    name: str
+    description: str
+    id: Optional[int] = None
+'''
