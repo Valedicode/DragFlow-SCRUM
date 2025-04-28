@@ -86,7 +86,7 @@ POSTGRES_PASSWORD: # Set the database password here
 ```
 Specify the URL_DATABASE in the **database.py**:
 ```bash
-URL_DATABASE = 'postgresql://user:password@db:5433/
+URL_DATABASE = 'postgresql://user:password@db:5432/databasename'
 ```
 Go to the root directory and execute the following command
 ```bash
