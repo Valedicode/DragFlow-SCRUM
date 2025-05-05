@@ -91,3 +91,16 @@ Go to the root directory and execute the following command
 ```bash
 docker-compose up --build        
 ```
+
+#### Trouble shooting
+In case the following error is shown: "Error: Cannot find module '../lightningcss.linux-x64-gnu.node'"
+Do the following steps:
+1. Go to the frontend docker 
+```bash
+docker exec -it <docker-frontend-name> -1 sh
+```
+2. Clear the npm Cache and rebuild the frontend.Sometimes, the npm cache might cause issues with linking native modules (like .node files).
+```bash
+npm cache clean --force
+npm install
+```
