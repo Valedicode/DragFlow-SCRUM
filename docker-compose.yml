@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/usr/src/app
+    working_dir: /usr/src/app
+    depends_on:
+      - db   # Ensure backend waits for the db service to be ready
+    command: ["sh", "-c", "sleep 10 && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"]  # Wait 10 seconds for the DB to be ready
+
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+    working_dir: /usr/src/app
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}       # Set the database name here
+      POSTGRES_USER: ${POSTGRES_USER}     # Set the database user here
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Set the database password here
+    ports:
+      - "5433:5432"   # Expose PostgreSQL on port 5433 of the host
+    volumes:
+      - ./data:/var/lib/postgresql/data  # Persistent data storage
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d Scrum-AI"]
+        interval: 30s
+        retries: 5
+        start_period: 30s
+        timeout: 30s
